@@ -1,31 +1,35 @@
-var deviceorientation = window.addEventListener(
-  "deviceorientation",
-  handleOrientation,
-  false
-);
-function handleOrientation(event) {
-  // var absolute = event.absolute;
-  // var alpha = event.alpha;
-  // var beta = event.beta;
-  // var gamma = event.gamma;
-  // console.log("Device Orientation ", absolute, alpha, beta, gamma);
-}
-
-if (window.DeviceMotionEvent) {
-  console.log("device motion");
-  window.addEventListener("devicemotion", motion, false);
+var flag = 1;
+if (window.DeviceOrientationEvent) {
+  window.addEventListener("deviceorientation", handleOrientation, false);
 } else {
-  console.log("DeviceMotionEvent is not supported");
+  console.log("DeviceOrientation is not supported");
 }
 
-function motion(event) {
-  console.log(event)
-  // console.log(
-  //   "Accelerometer: " +
-  //     event.accelerationIncludingGravity.x +
-  //     ", " +
-  //     event.accelerationIncludingGravity.y +
-  //     ", " +
-  //     event.accelerationIncludingGravity.z
-  // );
+function handleOrientation(event) {
+  if (Math.abs(event.gamma) > 75 && Math.abs(event.gamma) < 90  && flag) {
+    if (window.DeviceMotionEvent) {
+      console.log("Working", flag)
+      window.addEventListener("devicemotion", motion, false);
+      flag = 0;
+    } else {
+      console.log("DeviceMotion is not supported");
+    }
+  }
+}
+let moveCounter = 0;
+function motion(e) {
+  let acc = e.acceleration;
+
+  if (!acc.x) return;
+
+  if (Math.abs(acc.x) >= 5 && Math.abs(acc.y) >= 5) {
+    moveCounter++;
+    console.log(moveCounter);
+
+    if (moveCounter > 4) {
+      console.log("Device is in motion");
+      window.removeEventListener("devicemotion", motion, false);
+      moveCounter = 0;
+    }
+  }
 }
