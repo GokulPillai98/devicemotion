@@ -6,9 +6,9 @@ if (window.DeviceOrientationEvent) {
 }
 
 function handleOrientation(event) {
-  if (Math.abs(event.gamma) > 75 && Math.abs(event.gamma) < 90  && flag) {
+  if (Math.abs(event.gamma) > 75 && Math.abs(event.gamma) < 90 && flag) {
     if (window.DeviceMotionEvent) {
-      console.log("Working", flag)
+      $("body").append("Added divce motion listener");
       window.addEventListener("devicemotion", motion, false);
       flag = 0;
     } else {
@@ -25,9 +25,10 @@ function motion(e) {
   if (Math.abs(acc.x) >= 5 && Math.abs(acc.y) >= 5) {
     moveCounter++;
     console.log(moveCounter);
+    $("body").append(moveCounter);
 
     if (moveCounter > 4) {
-      console.log("Device is in motion");
+      $("body").append("brochure is ready");
       window.removeEventListener("devicemotion", motion, false);
       moveCounter = 0;
     }
