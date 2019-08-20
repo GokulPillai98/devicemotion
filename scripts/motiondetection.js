@@ -3,6 +3,7 @@ if (window.DeviceOrientationEvent) {
   window.addEventListener("deviceorientation", handleOrientation, false);
 } else {
   console.log("DeviceOrientation is not supported");
+  $("body").append("<p>DeviceOrientation is not supported</p>");
 }
 
 function handleOrientation(event) {
@@ -14,6 +15,7 @@ function handleOrientation(event) {
       flag = 0;
     } else {
       console.log("DeviceMotion is not supported");
+      $("body").append("<p>DeviceMotion is not supported</p>");
     }
   }
 }
