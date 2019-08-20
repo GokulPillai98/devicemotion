@@ -4,11 +4,11 @@ var deviceorientation = window.addEventListener(
   false
 );
 function handleOrientation(event) {
-  var absolute = event.absolute;
-  var alpha = event.alpha;
-  var beta = event.beta;
-  var gamma = event.gamma;
-  console.log("Device Orientation ", absolute, alpha, beta, gamma);
+  // var absolute = event.absolute;
+  // var alpha = event.alpha;
+  // var beta = event.beta;
+  // var gamma = event.gamma;
+  // console.log("Device Orientation ", absolute, alpha, beta, gamma);
 }
 
 if (window.DeviceMotionEvent) {
@@ -19,6 +19,7 @@ if (window.DeviceMotionEvent) {
 }
 
 function motion(event) {
+  console.log(event)
   // console.log(
   //   "Accelerometer: " +
   //     event.accelerationIncludingGravity.x +
