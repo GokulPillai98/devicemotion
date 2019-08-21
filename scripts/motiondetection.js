@@ -1,4 +1,5 @@
 var flag = 1;
+console.log("check js")
 if (window.DeviceOrientationEvent) {
   console.log("DeviceOrientationEvent supported")
   window.addEventListener("deviceorientation", handleOrientation, false);
