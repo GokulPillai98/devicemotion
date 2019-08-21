@@ -1,5 +1,6 @@
 var flag = 1;
 if (window.DeviceOrientationEvent) {
+  console.log("DeviceOrientationEvent supported")
   window.addEventListener("deviceorientation", handleOrientation, false);
 } else {
   console.log("DeviceOrientation is not supported");
@@ -7,11 +8,12 @@ if (window.DeviceOrientationEvent) {
 }
 
 function handleOrientation(event) {
+  console.log("Handle orientation");
   if (Math.abs(event.gamma) > 75 && Math.abs(event.gamma) < 90 && flag) {
     if (window.DeviceMotionEvent) {
       $("body").append("<p>Added divce motion listener</p>");
-      console.log($("body"))
-      window.addEventListener("devicemotion", motion, false);
+      console.log("DeviceMotionEvent supported")
+      window.addEventListener("devicemotion", handleMotion, false);
       flag = 0;
     } else {
       console.log("DeviceMotion is not supported");
@@ -20,11 +22,10 @@ function handleOrientation(event) {
   }
 }
 let moveCounter = 0;
-function motion(e) {
+function handleMotion(e) {
+  console.log("Handle motion")
   let acc = e.acceleration;
-
   if (!acc.x) return;
-
   if (Math.abs(acc.x) >= 5 && Math.abs(acc.y) >= 5) {
     moveCounter++;
     console.log(moveCounter);
